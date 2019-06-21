@@ -357,7 +357,7 @@ Person6.greeting(); */
 
 // CLASSES AND SUBCLASES
 
-var Person5 = function(name, yearOfBirth, job) {
+/* var Person5 = function(name, yearOfBirth, job) {
   this.name = name;
   this.yearOfBirth = yearOfBirth;
   this.job = job;
@@ -407,4 +407,70 @@ class Athlete6 extends Person6 {
 const johnAthlete6 = new Athlete6('John', 1990, 'swimmer', 3, 10);
 
 johnAthlete6.wonMedal();
-johnAthlete6.calculateAge();
+johnAthlete6.calculateAge(); */
+
+
+
+class Park {
+  constructor(name, trees, area, age){
+    this._name = name;
+    this._trees = trees;
+    this._area = area;
+    this._age = age;
+  }
+
+  calcTreeDensity(){
+    return this._trees / this._area;
+  }
+
+  getTreeDensity(){
+    return `${this._name} has a tree density of ${this.calcTreeDensity()} trees per square km`;
+  }
+}
+
+class Street {
+  constructor(name, length, size = 'normal', yearOfBuilt){
+    this._name = name;
+    this._length = length;
+    this._size = size;
+    this._yearOfBuilt = yearOfBuilt;
+  }
+
+  getClasification(){
+    return `${this._name}, built in ${this._yearOfBuilt}, is a ${this._size} street.`
+  }
+}
+
+let park1 = new Park("Park 1", 500, 200, 4);
+let park2 = new Park("Park 2", 2000, 300, 5);
+let park3 = new Park("Park 3", 800, 400, 2);
+
+let parks = [park1, park2, park3];
+
+console.log('----PARKS REPORT----');
+
+const SUM_AGE = parks.reduce((acc, sig) =>  acc + sig._age, 0 );
+const AVERAGE_AGE = SUM_AGE/ (parks.length -1);
+console.log(`Our parks have an average age of ${AVERAGE_AGE} years`);
+
+parks.map(park =>  {
+  console.log(park.getTreeDensity())
+  if (park._trees > 1000) {
+    console.log(`${park._name} has more than 1000 trees.`)
+  }
+});
+
+
+
+let street1 = new Street("Street 1", 900, "tiny", 1990 );
+let street2 = new Street("Street 2", 900, "small", 1990 );
+let street3 = new Street("Street 3", 900, "big", 1990 );
+let street4 = new Street("Street 4", 900, "huge", 1990 );
+
+console.log('----STREETS REPORT----');
+
+let streets = [street1, street2, street3, street4];
+const STREET_SUM_LENGTH = streets.reduce((acc, sig) => sig._length, 0);
+const STREET_AVERAGE_LENGTH = STREET_SUM_LENGTH / streets.length;
+console.log(`Our ${streets.length} streets have a total of length of ${STREET_SUM_LENGTH} km, with an average of ${STREET_AVERAGE_LENGTH} km`);
+streets.map(street => console.log(street.getClasification()))
